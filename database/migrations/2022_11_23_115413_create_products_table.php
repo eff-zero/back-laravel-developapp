@@ -20,7 +20,7 @@ return new class extends Migration
             $table->float('price', 10, 2);
             $table->integer('stock');
             $table->string('description');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->integer('state')->default(1); // 1: activo
             $table->timestamps();
         });

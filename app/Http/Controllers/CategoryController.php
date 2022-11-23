@@ -8,6 +8,16 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
+
+    /**
+     * Get all categories with state equal 1 or activate.
+     */
+    public function getAllCategories()
+    {
+        return Category::all();
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +25,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = $this->getAllCategories();
+        return response()->json($categories);
     }
 
     /**
@@ -36,7 +47,9 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+        // No tiene validaciones
+        Category::create($request->all());
+        return response()->json($this->getAllCategories());
     }
 
     /**
@@ -70,7 +83,9 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        // No tiene valicaciones.
+        $category->update($request->all());
+        return response()->json($this->getAllCategories());
     }
 
     /**
@@ -81,6 +96,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $newState = $category->state == 1 ? 0 : 1;
+        $category->update(['state' => $newState]);
+        return response()->json($this->getAllCategories());
     }
 }
