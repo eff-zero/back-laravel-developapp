@@ -3,6 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Category;
+use App\Models\Rol;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,5 +24,14 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        $this->call([
+            RolSeeder::class,
+            CategorySeeder::class,
+            ProductSeeder::class
+        ]);
+
+        User::factory()->create(['email' => 'jesus@admin.com', 'rol_id' => 1]);
+        User::factory()->create(['email' => 'jesus@client.com', 'rol_id' => 2]);
     }
 }

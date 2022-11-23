@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->integer('state'); // 1: activo
+            $table->integer('state')->default(1); // 1: activo
             $table->timestamps();
         });
     }
