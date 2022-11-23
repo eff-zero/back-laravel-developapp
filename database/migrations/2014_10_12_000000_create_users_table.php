@@ -15,12 +15,17 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('rol_id')->constrained();
             $table->string('name');
+            $table->string('lastname');
+            $table->string('city');
+            $table->string('address');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->rememberToken();
+            $table->integer('state')->default(1); // 1: activo, 0: no activo
             $table->timestamps();
+            // $table->timestamp('email_verified_at')->nullable();
+            // $table->rememberToken();
         });
     }
 
