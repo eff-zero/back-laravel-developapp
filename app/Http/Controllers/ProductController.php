@@ -10,6 +10,12 @@ use App\Models\Product;
 class ProductController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except('index'); // Middleware para autentificación
+        $this->middleware('role:1')->except('index'); // Middleware para administradores
+    }
+
     /**
      * Get all products with it categories with 
      * state equal 1 or activate.
@@ -28,16 +34,6 @@ class ProductController extends Controller
     {
         $products = $this->getAllProducts();
         return response()->json($products);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -60,17 +56,6 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Product $product)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
     {
         //
     }

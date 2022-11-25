@@ -18,8 +18,6 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake()->name(),
-            'lastname' => fake()->lastName(),
             'city' => fake()->randomElement(['Barranquilla', 'Bogota']),
             'address' => fake()->bothify('Calle ## N##-##'),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password

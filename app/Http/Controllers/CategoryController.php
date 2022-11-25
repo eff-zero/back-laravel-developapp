@@ -9,14 +9,19 @@ use App\Models\Category;
 class CategoryController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except('index'); // Middleware para autentificación
+        $this->middleware('role:1')->except('index'); // Middleware para administradores
+    }
+
     /**
-     * Get all categories with state equal 1 or activate.
+     * Get all categories.
      */
     public function getAllCategories()
     {
-        return Category::all();
+        return Category::with('products')->get();
     }
-
 
     /**
      * Display a listing of the resource.
@@ -30,16 +35,6 @@ class CategoryController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreCategoryRequest  $request
@@ -50,28 +45,6 @@ class CategoryController extends Controller
         // No tiene validaciones
         Category::create($request->all());
         return response()->json($this->getAllCategories());
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Category $category)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Category $category)
-    {
-        //
     }
 
     /**

@@ -31,7 +31,17 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class
         ]);
 
-        User::factory()->create(['email' => 'jesus@admin.com', 'rol_id' => 1]);
-        User::factory()->create(['email' => 'jesus@client.com', 'rol_id' => 2]);
+        User::factory()->create([
+            'name' => 'Jesus',
+            'lastname' => 'admin',
+            'email' => 'jesus@admin.com',
+            'rol_id' => 1,
+        ]);
+        User::factory()->create([
+            'name' => 'Jesus',
+            'lastname' => 'client',
+            'email' => 'jesus@client.com',
+            'rol_id' => 2,
+        ]);
     }
 }
